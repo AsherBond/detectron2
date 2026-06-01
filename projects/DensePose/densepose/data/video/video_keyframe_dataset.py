@@ -16,6 +16,7 @@ from detectron2.utils.file_io import PathManager
 from ..utils import maybe_prepend_base_path
 from .frame_selector import FrameSelector, FrameTsList
 
+# pyre-fixme[16]: Module `av` has no attribute `AVError`.
 _AVError = getattr(av, "AVError", OSError)
 
 FrameList = List[av.frame.Frame]  # pyre-ignore[16]

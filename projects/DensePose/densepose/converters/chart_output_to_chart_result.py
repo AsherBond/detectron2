@@ -156,6 +156,7 @@ def resample_confidences_to_bbox(
             # (targeted for segmentation confidences that have only 1 channel)
             result = resampled_confidence[0, 0]
 
+        # pyre-fixme[6]: For 2nd argument expected `None` but got `Tensor`.
         confidence_results[key] = result
 
     return confidence_results  # pyre-ignore[7]
