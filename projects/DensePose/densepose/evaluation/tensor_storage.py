@@ -24,6 +24,7 @@ class SizeData:
 def _calculate_record_field_size_b(data_schema: Dict[str, SizeData], field_name: str) -> int:
     schema = data_schema[field_name]
     element_size_b = np.dtype(schema.dtype).itemsize
+    # pyrefly: ignore [incompatible-overload-residual]
     record_field_size_b = reduce(mul, schema.shape) * element_size_b
     return record_field_size_b
 
@@ -99,6 +100,7 @@ class SingleProcessTensorStorage:
             field_size_b = self.record_field_sizes_b[field_name]
             chunk = data_bytes[cur_idx : cur_idx + field_size_b]
             data_np = np.frombuffer(
+                # pyrefly: ignore [incompatible-overload-residual]
                 chunk, dtype=schema.dtype, count=reduce(mul, schema.shape)
             ).reshape(schema.shape)
             record[field_name] = torch.from_numpy(data_np)
