@@ -16,7 +16,6 @@ from detectron2.utils.file_io import PathManager
 from ..utils import maybe_prepend_base_path
 from .frame_selector import FrameSelector, FrameTsList
 
-# pyre-fixme[16]: Module `av` has no attribute `AVError`.
 _AVError = getattr(av, "AVError", OSError)
 
 FrameList = List[av.frame.Frame]  # pyre-ignore[16]
@@ -37,7 +36,6 @@ def list_keyframes(video_fpath: str, video_stream_idx: int = 0) -> FrameTsList:
     """
     try:
         with PathManager.open(video_fpath, "rb") as io:
-            # pyre-fixme[16]: Module `av` has no attribute `open`.
             container = av.open(io, mode="r")
             stream = container.streams.video[video_stream_idx]
             keyframes = []
@@ -101,7 +99,7 @@ def list_keyframes(video_fpath: str, video_stream_idx: int = 0) -> FrameTsList:
 
 def read_keyframes(
     video_fpath: str, keyframes: FrameTsList, video_stream_idx: int = 0
-) -> FrameList:  # pyre-ignore[11]
+) -> FrameList:
     """
     Reads keyframe data from a video file.
 
@@ -115,7 +113,6 @@ def read_keyframes(
     """
     try:
         with PathManager.open(video_fpath, "rb") as io:
-            # pyre-fixme[16]: Module `av` has no attribute `open`.
             container = av.open(io)
             stream = container.streams.video[video_stream_idx]
             frames = []
@@ -254,7 +251,6 @@ class VideoKeyframeDataset(Dataset):
         if type(category_list) is list:
             self.category_list = category_list
         else:
-            # pyrefly: ignore [bad-assignment]
             self.category_list = [category_list] * len(video_list)
         assert len(video_list) == len(
             self.category_list

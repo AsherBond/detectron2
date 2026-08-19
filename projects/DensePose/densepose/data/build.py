@@ -515,7 +515,6 @@ def build_frame_selector(cfg: CfgNode):
         frame_selector = LastKFramesSelector(cfg.NUM_IMAGES)
     elif strategy == FrameSelectionStrategy.ALL:
         frame_selector = None
-    # pyre-fixme[61]: `frame_selector` may not be initialized here.
     return frame_selector
 
 

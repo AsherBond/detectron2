@@ -36,7 +36,6 @@ class ImageListDataset(Dataset):
         if type(category_list) is list:
             self.category_list = category_list
         else:
-            # pyrefly: ignore [bad-assignment]
             self.category_list = [category_list] * len(image_list)
         assert len(image_list) == len(
             self.category_list
